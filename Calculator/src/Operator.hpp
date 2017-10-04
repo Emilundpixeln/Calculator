@@ -3,6 +3,8 @@
 #include "OperatorData.hpp"
 #include "ConstantValueData.hpp"
 typedef bool(*ApplyFunction) (OperatorData::Data* data, DataWrapper* prev, DataWrapper* next);
+#define dCast(t, p) (t::Data*) p->ptr
+
 
 namespace OperatorFunction
 {	
@@ -13,74 +15,13 @@ namespace OperatorFunction
 			// OperatorType, OperatorType
 			[](OperatorData::Data* data, DataWrapper* prev, DataWrapper* next)
 			{
-				// turn + -, - +, - -, + + into -, -, +, +
-				// doesn't care about next
-
-				OperatorData::Data& thisData = *data;
-				OperatorData::Data& prevData = *(OperatorData::Data*)(prev->ptr);
-
-				if (prevData.type == OperatorData::addition)
-				{
-					// + - -> -, + + -> +
-					if (thisData.type == OperatorData::addition || thisData.type == OperatorData::subtraction)
-					{
-						prevData.destroy = true;
-						return true;
-					}
-				}
-				else if (prevData.type == OperatorData::subtraction)
-				{
-					// - - -> +, - + -> -
-					if (thisData.type == OperatorData::subtraction)
-					{
-						prevData.type = OperatorData::addition;
-						thisData.destroy = true;
-						return true;
-					}
-					else if (thisData.type == OperatorData::addition)
-					{
-						thisData.destroy = true;
-						return true;
-					}
-				}
-				return false;
+				return data->apply_Operator_ALL(dCast(OperatorData, prev));
 			},
 			
 			// OperatorType, ConstantValueType
 			[](OperatorData::Data* data, DataWrapper* prev, DataWrapper* next)
 			{
-				// turn + -, - +, - -, + + into -, -, +, +
-				// doesn't care about next
-				//same as above
-
-				OperatorData::Data& thisData = *data;
-				OperatorData::Data& prevData = *(OperatorData::Data*)(prev->ptr);
-
-				if (prevData.type == OperatorData::addition)
-				{
-					// + - -> -, + + -> +
-					if (thisData.type == OperatorData::addition || thisData.type == OperatorData::subtraction)
-					{
-						prevData.destroy = true;
-						return true;
-					}
-				}
-				else if (prevData.type == OperatorData::subtraction)
-				{
-					// - - -> +, - + -> -
-					if (thisData.type == OperatorData::subtraction)
-					{
-						prevData.type = OperatorData::addition;
-						thisData.destroy = true;
-						return true;
-					}
-					else if (thisData.type == OperatorData::addition)
-					{
-						thisData.destroy = true;
-						return true;
-					}
-				}
-				return false;
+				return data->apply_Operator_ALL(dCast(OperatorData, prev));
 			}
 
 		},
