@@ -11,9 +11,7 @@ namespace OperatorData
 		division,
 		remainder,
 		expont,
-		factorial,
-		absolute,
-
+		absolute
 	};
 
 	class Data
@@ -54,5 +52,7 @@ namespace OperatorData
 			}
 			return false;
 		}
+
+		bool apply_Operator_ALL(OperatorData::Data* prev)
 	};
 }

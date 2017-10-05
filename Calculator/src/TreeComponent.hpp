@@ -24,7 +24,8 @@ public:
 		data.type = DataWrapper::OperatorType;
 	}
 
-	bool apply(DataWrapper* prev, DataWrapper* next) {
+	// level is which operations should run eg 0: abs 1: power 2: mul, div...
+	bool apply(DataWrapper* prev, DataWrapper* next, int level) {
 		bool dirty = false;
 		switch (data.type)
 		{

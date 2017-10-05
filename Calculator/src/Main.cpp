@@ -5,10 +5,15 @@
 
 #include <iostream>
 
+/*
+// Each Typer eg OperatorType, ConstantValueType is a Class which has methods for appling.
+// More complex types will have method to interact with less complex types eg Polynomial.add(ConstantValue) not ConstantValue.add(Polynomial) so that the type stays
+//
+//
+*/
 
 /* TODO
-	-Data Wrapper struct to avoid headers including each other
-	-Comment
+
 */
 int main()
 {
