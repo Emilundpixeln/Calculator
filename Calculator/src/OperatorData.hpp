@@ -53,6 +53,43 @@ namespace OperatorData
 			return false;
 		}
 
-		bool apply_Operator_ALL(OperatorData::Data* prev)
+		bool apply_ConstantValue_ConstantValue(ConstantValueData::Data* prev, ConstantValueData::Data* next, int level)
+		{
+			switch (type)
+			{
+			case OperatorData::addition:
+				if (level != 3)
+					return false;
+				prev->add(*next);
+				break;
+			case OperatorData::subtraction:
+				if (level != 3)
+					return false;
+				prev->sub(*next);
+				break;
+			case OperatorData::multiplication:
+				if (level != 2)
+					return false;
+				prev->mul(*next);
+				break;
+			case OperatorData::division:
+				if (level != 2)
+					return false;
+				prev->div(*next);
+				break;
+			case OperatorData::expont:
+				if (level != 1)
+					return false;
+				prev->pow_(*next);
+				break;
+			default:
+				return false;
+			}
+			// something changed
+			// delete this and next
+			this->destroy = true;
+			next->destroy = true;
+			return true;
+		}
 	};
 }

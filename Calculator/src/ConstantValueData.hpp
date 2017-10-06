@@ -49,7 +49,7 @@ namespace ConstantValueData
 		}
 
 		// sets this to this to the power of other 
-		void exp(Data& other)
+		void pow_(Data& other)
 		{
 			value = pow(value, other.value);
 		}

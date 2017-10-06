@@ -14,31 +14,40 @@ public:
 	}
 
 	bool apply() {
+		// makes things easier
 		std::vector<TreeComponent>& c = *components;
-		dirty = true;
-		while (dirty)
+
+		// go through all the levels
+		for (int level = 0; level < 4; level++)
 		{
-			for (size_t i = 0; i < c.size(); i++)
-			{
-				if (i == 0)
-					dirty = c[i].apply(nullptr, &c[i + 1].data);
-				else if (i == c.size() - 1)
-					dirty = c[i].apply(&c[i - 1].data, nullptr);
-				else
-					dirty = c[i].apply(&c[i - 1].data, &c[i + 1].data);	
-			}
-			if (dirty)
+			dirty = true;
+			// repeat until nothing changes
+			while (dirty) 
 			{
 				for (size_t i = 0; i < c.size(); i++)
-					if (c[i].destroy())
-					{
-						c.erase(c.begin() + i);
-						i--;
-					}
+				{	
+					// make sure that we don't go out of bounds
+					if (i == 0)
+						dirty = c[i].apply(nullptr, &c[i + 1].data, level);
+					else if (i == c.size() - 1)
+						dirty = c[i].apply(&c[i - 1].data, nullptr, level);
+					else
+						dirty = c[i].apply(&c[i - 1].data, &c[i + 1].data, level);
+				}
+				if (dirty)
+				{
+					// erase all the components which sgould get destroyed
+					for (size_t i = 0; i < c.size(); i++)
+						if (c[i].destroy())
+						{
+							c.erase(c.begin() + i);
+							i--;
+						}
 
+				}
 			}
+			return true;
 		}
-		return true;
 	}
 
 	~Tree()

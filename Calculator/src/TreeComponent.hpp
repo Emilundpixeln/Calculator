@@ -2,6 +2,7 @@
 #include "DataWrapper.hpp"
 #include "OperatorData.hpp"
 #include "Operator.hpp"
+#include "ConstantValueData.hpp"
 #include "ConstantValue.hpp"
 
 #include <iostream>
