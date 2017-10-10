@@ -22,6 +22,7 @@ struct DataWrapper
 			delete (OperatorData::Data*)ptr;
 			break;
 		case ConstantValueType:
+			delete (ConstantValueData::Data*)ptr;
 			break;
 		default:
 			break;

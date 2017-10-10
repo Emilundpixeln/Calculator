@@ -6,6 +6,7 @@ class Tree
 {
 	std::vector<TreeComponent>* components;
 public:
+
 	bool dirty = false;
 
 	Tree(const std::vector<TreeComponent>& l)

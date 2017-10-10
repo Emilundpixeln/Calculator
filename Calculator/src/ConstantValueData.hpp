@@ -9,6 +9,16 @@ namespace ConstantValueData
 		bool destroy = false; // every object should have a destroy so it can be destroyed 
 		double value;
 
+		Data(double _value) 
+		{
+			value = _value;
+		}
+
+		~Data()
+		{
+
+		}
+
 
 		// methods
 

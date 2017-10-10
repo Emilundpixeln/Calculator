@@ -20,6 +20,16 @@ namespace OperatorData
 		bool destroy = false; // every object should have a destroy so it can be destroyed 
 		Type type;
 
+		Data(Type _type)
+		{
+			type = _type;
+		}
+
+		~Data()
+		{
+
+		}
+
 		// apply methods
 		bool apply_Operator_ALL(OperatorData::Data* prev)
 		{

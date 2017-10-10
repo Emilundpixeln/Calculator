@@ -48,7 +48,8 @@ class Operator
 public:
 	static bool apply(OperatorData::Data* data, DataWrapper* prev, DataWrapper* next, int level)
 	{
-		return false;
+		// call the right function
+		return OperatorFunction::functions[prev->type][next->type](data, prev, next, level);
 	}
 };
 

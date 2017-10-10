@@ -53,7 +53,7 @@ public:
 			delete (OperatorData::Data*)data.ptr;
 			break;
 		case DataWrapper::ConstantValueType:
-			delete (ConstantValueData::Data*)data.ptr; // problemm here
+			delete (ConstantValueData::Data*)data.ptr;
 			break;
 		default:
 			break;
